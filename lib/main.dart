@@ -78,6 +78,13 @@ class _HomeState extends State<Home> {
   }
 }
 
+class TurnipModule {
+  List<num> weekprice = List.generate(13, (index) => 0);
+  void init() {
+    weekprice = List.generate(13, (index) => 0);
+  }
+}
+
 class Caculator extends StatefulWidget {
   @override
   _CaculatorState createState() => _CaculatorState();
@@ -88,10 +95,17 @@ class _CaculatorState extends State<Caculator> {
   List<bool> _lasttimemodule = List.generate(5, (index) => false);
   List<TextEditingController> text =
       List.generate(2 * 6 + 1, (index) => TextEditingController());
+  final double width = 250;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: (){},child: Icon(Icons.add),),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _firsttimebuy;
+            _lasttimemodule;
+          },
+          child: Icon(Icons.add),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           color: Colors.blue,
@@ -99,11 +113,11 @@ class _CaculatorState extends State<Caculator> {
           child: Row(children: <Widget>[
             IconButton(
               icon: Icon(Icons.table_chart),
-              onPressed: (){},
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.terrain),
-              onPressed: (){},
+              onPressed: () {},
             )
           ], mainAxisAlignment: MainAxisAlignment.spaceAround),
         ),
@@ -125,149 +139,184 @@ class _CaculatorState extends State<Caculator> {
           Container(
             height: double.infinity,
             // width: double.infinity,
-            child: SingleChildScrollView(
+            child: CustomScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 35),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "大頭菜計算機",
-                    style: TextStyle(color: Colors.white, fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 20),
-                  Container(),
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        Text("這是你第一次購買大頭菜嗎", style: textsty),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ToggleButtons(
-                            children: <Widget>[Text("否"), Text("是")],
-                            constraints:
-                                BoxConstraints(minHeight: 50, minWidth: 50),
-                            onPressed: (int index) {
-                              setState(() {
-                                for (int buttonIndex = 0;
-                                    buttonIndex < _firsttimebuy.length;
-                                    buttonIndex++) {
-                                  if (buttonIndex == index) {
-                                    _firsttimebuy[buttonIndex] =
-                                        !_firsttimebuy[buttonIndex];
-                                  } else {
-                                    _firsttimebuy[buttonIndex] = false;
-                                  }
-                                }
-                              });
-                            },
-                            isSelected: _firsttimebuy,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          "上次的大頭菜模型",
-                          style: textsty,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Card(
-                          child: ToggleButtons(
-                            children: <Widget>[
-                              Text("不知道"),
-                              Text("波型"),
-                              Text("四期型"),
-                              Text("三期型"),
-                              Text("遞減型"),
-                            ],
-                            isSelected: _lasttimemodule,
-                            constraints:
-                                BoxConstraints(minHeight: 50, minWidth: 50),
-                            onPressed: (int index) {
-                              setState(() {
-                                for (int buttonIndex = 0;
-                                    buttonIndex < _lasttimemodule.length;
-                                    buttonIndex++) {
-                                  if (buttonIndex == index) {
-                                    _lasttimemodule[buttonIndex] =
-                                        !_lasttimemodule[buttonIndex];
-                                  } else {
-                                    _lasttimemodule[buttonIndex] = false;
-                                  }
-                                }
-                              });
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  enterfield(text[0], "買入菜價"),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+              // padding: EdgeInsets.symmetric(horizontal: 40, vertical: 35),
+              slivers: <Widget>[SliverPadding(padding: EdgeInsets.only(top:30),),SliverList(delegate: SliverChildListDelegate([
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          enterfield(text[1], "周一早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[2], "周一下午")
-                        ],
+                      Text(
+                        "大頭菜計算機",
+                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        textAlign: TextAlign.center,
                       ),
-                      Column(
-                        children: <Widget>[
-                          enterfield(text[3], "周二早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[4], "周二下午")
-                        ],
+                      SizedBox(height: 20),
+                      Container(),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Text("這是你第一次購買大頭菜嗎", style: textsty),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Card(
+                              child: ToggleButtons(
+                                children: <Widget>[Text("否"), Text("是")],
+                                constraints:
+                                    BoxConstraints(minHeight: 50, minWidth: 50),
+                                onPressed: (int index) {
+                                  setState(() {
+                                    for (int buttonIndex = 0;
+                                        buttonIndex < _firsttimebuy.length;
+                                        buttonIndex++) {
+                                      if (buttonIndex == index) {
+                                        _firsttimebuy[buttonIndex] =
+                                            !_firsttimebuy[buttonIndex];
+                                      } else {
+                                        _firsttimebuy[buttonIndex] = false;
+                                      }
+                                    }
+                                  });
+                                },
+                                isSelected: _firsttimebuy,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          enterfield(text[5], "周三早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[6], "周三下午")
-                        ],
+                      SizedBox(
+                        height: 20,
                       ),
-                      Column(
-                        children: <Widget>[
-                          enterfield(text[7], "周四早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[8], "周四下午")
-                        ],
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "上次的大頭菜模型",
+                              style: textsty,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Card(
+                              child: ToggleButtons(
+                                children: <Widget>[
+                                  Text("不知道"),
+                                  Text("波型"),
+                                  Text("四期型"),
+                                  Text("三期型"),
+                                  Text("遞減型"),
+                                ],
+                                isSelected: _lasttimemodule,
+                                constraints:
+                                    BoxConstraints(minHeight: 50, minWidth: 50),
+                                onPressed: (int index) {
+                                  setState(() {
+                                    for (int buttonIndex = 0;
+                                        buttonIndex < _lasttimemodule.length;
+                                        buttonIndex++) {
+                                      if (buttonIndex == index) {
+                                        _lasttimemodule[buttonIndex] =
+                                            !_lasttimemodule[buttonIndex];
+                                      } else {
+                                        _lasttimemodule[buttonIndex] = false;
+                                      }
+                                    }
+                                  });
+                                },
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          enterfield(text[9], "周五早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[10], "周五下午")
-                        ],
+                      SizedBox(
+                        height: 20,
                       ),
-                      Column(
+                      enterfield(text[0], "買入菜價"),
+                      SizedBox(height: 20),
+                      Wrap(
+                        spacing: 20,
+                        alignment: WrapAlignment.center,
                         children: <Widget>[
-                          enterfield(text[11], "周六早上"),
-                          SizedBox(height: 10),
-                          enterfield(text[12], "周六下午")
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[1], "周一早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[2], "周一下午"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[3], "周二早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[4], "周二下午"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[5], "周三早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[6], "周三下午"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[7], "周四早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[8], "周四下午"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[9], "周五早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[10], "周五下午"),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: width,
+                            child: Row(
+                              children: <Widget>[
+                                enterfield(text[11], "周六早上"),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                enterfield(text[12], "周六下午")
+                              ],
+                            ),
+                          ),
                         ],
-                      ),
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ]),)
+                
+              ],
             ),
           ),
         ]));
@@ -287,12 +336,15 @@ class _CaculatorState extends State<Caculator> {
           Card(
             child: Container(
               child: TextField(
+                  textAlign: TextAlign.center,
+                  maxLength: 3,
                   controller: controller,
                   decoration: InputDecoration(
+                    counterText: '',
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(left: 75),
+                    contentPadding: EdgeInsets.only(left: 0),
                   )),
-              width: 150,
+              width: 100,
             ),
           )
         ],
