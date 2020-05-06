@@ -24167,7 +24167,7 @@ $ix:1}
 P.Dt.prototype={}
 P.Du.prototype={}
 F.x5.prototype={
-M:function(a){return new S.oQ(new F.oc(null),"Flutter Demo",X.Yb(null),null)}}
+M:function(a){return new S.oQ(new F.oc(null),"AnimalForestToolBox",X.Yb(null),null)}}
 F.oc.prototype={
 aL:function(){return new F.BD(H.c([new F.ni(null),new F.oK(null)],u.F),C.t)}}
 F.BD.prototype={
