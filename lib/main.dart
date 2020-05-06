@@ -240,72 +240,60 @@ class _CaculatorState extends State<Caculator> {
                         children: <Widget>[
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[1], "周一早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                
                                 enterfield(text[2], "周一下午"),
                               ],
                             ),
                           ),
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[3], "周二早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                        
                                 enterfield(text[4], "周二下午"),
                               ],
                             ),
                           ),
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[5], "周三早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+              
                                 enterfield(text[6], "周三下午"),
                               ],
                             ),
                           ),
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[7], "周四早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                     
                                 enterfield(text[8], "周四下午"),
                               ],
                             ),
                           ),
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[9], "周五早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                 
                                 enterfield(text[10], "周五下午"),
                               ],
                             ),
                           ),
                           Container(
                             width: width,
-                            child: Row(
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 enterfield(text[11], "周六早上"),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                   
                                 enterfield(text[12], "周六下午")
                               ],
                             ),
